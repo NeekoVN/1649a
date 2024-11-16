@@ -1,8 +1,5 @@
 package MyADT.Queue;
 
-import java.util.Iterator;
-import java.util.NoSuchElementException;
-
 public class MyQueueADT<E> implements AbstractQueue<E> {
     private class Node<E> {
         private E element;

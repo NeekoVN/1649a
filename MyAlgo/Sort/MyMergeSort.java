@@ -1,7 +1,5 @@
 package MyAlgo.Sort;
 
-import Models.Book;
-
 import java.util.ArrayList;
 
 public class MyMergeSort {

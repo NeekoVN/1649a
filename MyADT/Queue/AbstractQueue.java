@@ -1,7 +1,5 @@
 package MyADT.Queue;
 
-import java.util.Iterator;
-
 public interface AbstractQueue<E> {
     void enqueue(E element);
 
