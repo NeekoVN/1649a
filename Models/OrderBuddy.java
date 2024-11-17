@@ -18,8 +18,7 @@ public class OrderBuddy {
 
         //TODO: hardcoded data
         for (Order order : OrderMockupData.orderData) {
-            this.pendingOrders.enqueue(order);
-            this.orderId++;
+            addOrder(order);
         }
     }
 
@@ -114,10 +113,15 @@ public class OrderBuddy {
     }
 
     public void viewAllBooks() {
-        for (Book book : BookMockupData.bookData) {
+        long startTime = System.nanoTime();
+        Book[] sortedBooks = BookMockupData.bookData;
+        MyBookMergeSort.mergeSort(sortedBooks, 0, sortedBooks.length - 1);
+        for (Book book : sortedBooks) {
             System.out.println(book.toString());
             System.out.println();
         }
+        long endTime = System.nanoTime();
+        System.out.println("Time taken to view all books using Merge Sort: " + (endTime - startTime) + " ns");
     }
 
     public boolean checkValidBookId(Integer bookId) {
