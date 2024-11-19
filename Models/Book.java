@@ -13,6 +13,10 @@ public class Book {
         this.quantity = quantity;
     }
 
+    public Book() {
+
+    }
+
     public String getTitle() {
         return title;
     }

@@ -9,16 +9,23 @@ import MyAlgo.Sort.MyBookMergeSort;
 public class OrderBuddy {
     private MyQueueADT<Order> pendingOrders;
     private MyQueueADT<Order> processedOrders;
+    private Book[] books;
     private Integer orderId;
+    private Integer bookId;
 
     public OrderBuddy() {
         this.pendingOrders = new MyQueueADT<>();
         this.processedOrders = new MyQueueADT<>();
         this.orderId = 1;
+        this.bookId = 1;
 
         //TODO: hardcoded data
         for (Order order : OrderMockupData.orderData) {
             addOrder(order);
+        }
+
+        for (Book book : BookMockupData.bookData) {
+            addBook(book);
         }
     }
 
@@ -26,13 +33,14 @@ public class OrderBuddy {
         long startTime = System.nanoTime();
         for (Integer bookId : order.getBookIds()) {
             Book book = getBook(bookId);
-            if (book != null) {
-                if (book.getQuantity() <= 0) {
-                    System.out.println("Book with ID " + bookId + " is out of stock, order cancelled.");
-                    return false;
-                }
-                book.setQuantity(book.getQuantity() - 1);
+            if (book == null || book.getQuantity() <= 0) {
+                System.out.println("Book with ID " + bookId + " is out of stock, order cancelled.");
+                return false;
             }
+        }
+        for (Integer bookId : order.getBookIds()) {
+            Book book = getBook(bookId);
+            book.setQuantity(book.getQuantity() - 1);
         }
         order.setOrderId(this.orderId);
         this.pendingOrders.enqueue(order);
@@ -165,4 +173,30 @@ public class OrderBuddy {
         long endTime = System.nanoTime();
         System.out.println("Time taken to search order: " + (endTime - startTime) + " ns");
     }
+
+    public boolean addBook(Book book) {
+        long startTime = System.nanoTime();
+
+        // Assign an auto-incremented ID to the book
+        book.setId(this.bookId++);
+
+        // Add the book to the book data array
+        Book[] books = BookMockupData.bookData;
+        Book[] newBooks = new Book[books.length + 1];
+
+        // Copy existing books to the new array
+        for (int i = 0; i < books.length; i++) {
+            newBooks[i] = books[i];
+        }
+
+        // Add the new book to the array
+        newBooks[books.length] = book;
+        BookMockupData.bookData = newBooks;
+
+        long endTime = System.nanoTime();
+        System.out.println("Time taken to add book: " + (endTime - startTime) + " ns");
+
+        return true;
+    }
+
 }
