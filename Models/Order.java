@@ -1,17 +1,18 @@
 package Models;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import MyADT.ArrayList.MyArrayListADT;
 import MyAlgo.Sort.MyMergeSort;
 
 public class Order {
     private Integer orderId;
-    private ArrayList<Integer> bookIds;
+    private MyArrayListADT<Integer> bookIds;
     private Integer customerId;
 
     public Order(Integer orderId, List<Integer> bookIds, Integer customerId) {
         this.orderId = orderId;
-        this.bookIds = new ArrayList<>(bookIds);
+        this.bookIds = new MyArrayListADT<>(bookIds);
         this.customerId = customerId;
     }
 
@@ -27,11 +28,11 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public ArrayList<Integer> getBookIds() {
+    public MyArrayListADT<Integer> getBookIds() {
         return bookIds;
     }
 
-    public void setBookIds(ArrayList<Integer> bookIds) {
+    public void setBookIds(MyArrayListADT<Integer> bookIds) {
         this.bookIds = bookIds;
     }
 
@@ -51,7 +52,7 @@ public class Order {
         System.out.println(toString());
     }
 
-    public void sortBookIds(ArrayList<Integer> bookIds) {
+    public void sortBookIds(MyArrayListADT<Integer> bookIds) {
         long startTime = System.nanoTime();
         MyMergeSort sortedBookIds = new MyMergeSort();
         sortedBookIds.mergeSort(bookIds, 0, bookIds.size() - 1);

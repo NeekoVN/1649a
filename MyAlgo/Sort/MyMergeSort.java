@@ -1,9 +1,10 @@
 package MyAlgo.Sort;
 
-import java.util.ArrayList;
+
+import MyADT.ArrayList.MyArrayListADT;
 
 public class MyMergeSort {
-    public static void mergeSort(ArrayList<Integer> arr, int l, int r) {
+    public static void mergeSort(MyArrayListADT<Integer> arr, int l, int r) {
         if (l < r) {
             int m = (l + r) / 2;
             mergeSort(arr, l, m);
@@ -12,12 +13,12 @@ public class MyMergeSort {
         }
     }
 
-    private static void merge(ArrayList<Integer> arr, int l, int m, int r) {
+    private static void merge(MyArrayListADT<Integer> arr, int l, int m, int r) {
         int n1 = m - l + 1;
         int n2 = r - m;
 
-        ArrayList<Integer> L = new ArrayList<>(n1);
-        ArrayList<Integer> R = new ArrayList<>(n2);
+        MyArrayListADT<Integer> L = new MyArrayListADT<>(n1);
+        MyArrayListADT<Integer> R = new MyArrayListADT<>(n2);
 
         for (int i = 0; i < n1; i++) {
             L.add(arr.get(l + i));
